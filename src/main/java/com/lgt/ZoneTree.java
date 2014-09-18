@@ -75,5 +75,27 @@ public class ZoneTree {
         return n.getData().indexOf(curtNode.getData()) != -1;
     }
 
-   
+    public static void main(String[] args) {
+        ZoneTree zt = new ZoneTree();
+        Node n = new Node("山东省", "37");
+        zt.addNode(n);
+        zt.addNode(new Node("北京","01"));
+        zt.addNode(new Node("河南","38"));
+        zt.addNode(new Node("聊城市", "3715"));
+        zt.addNode(new Node("济南市", "3716"));
+        zt.addNode(new Node("临清市", "371581"));
+        zt.addNode(new Node("冠县", "371582"));
+        zt.addNode(new Node("临市", "371583"));
+        zt.addNode(new Node("商河", "371681"));
+        zt.addNode(new Node("齐河", "371683"));
+        zt.addNode(new Node("聊城市1", "3815"));
+        zt.addNode(new Node("济南市1", "3816"));
+        zt.addNode(new Node("临清市1", "381581"));
+        zt.addNode(new Node("冠县1", "381582"));
+        zt.addNode(new Node("临市1", "381583"));
+        zt.addNode(new Node("商河1", "381681"));
+        zt.addNode(new Node("齐河1", "381683"));
+        zt.printDot();
+        System.out.println(zt);
+    }
 }
