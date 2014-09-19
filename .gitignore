@@ -1,5 +1,5 @@
 # The files below will not be commited!
-./idea
+.idea/
 identifier.iml
 target/
 tree.dot
