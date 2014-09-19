@@ -10,6 +10,9 @@ public class ZoneTree {
     private Node root = new Node("中国", "");
 
     public void addNode(Node n) {
+        if(findNode(root,n.getName())!=null){
+            return;
+        }
         Node curtNode = root;
         Node placeNode = null;
         while (curtNode != null) {
@@ -31,10 +34,32 @@ public class ZoneTree {
             placeNode.setLeftChild(n);
         }
     }
+
+    /**
+     * find the node which name equals to the given parameter name
+     * @param curtNode
+     * @param name
+     * @return the node which has the same name with parameter;null if not find.
+     */
+    public Node findNode(Node curtNode,String name){
+        Node n = null;
+        if(curtNode==null){
+            return n;
+        }
+        if( name.equalsIgnoreCase(curtNode.getName())){
+            return curtNode;
+        }else{
+            n = findNode(curtNode.getLeftChild(),name);
+        }
+        if(n==null){
+            n=findNode(curtNode.getRightsibling(),name);
+        }
+        return n;
+    }
     public String toString(){
         return "digraph test{"+getStrPath(root)+"}";
     }
-    public String getStrPath(Node n) {
+    private String getStrPath(Node n) {
         StringBuilder sb = new StringBuilder("");
         if (n != null) {
             Node temp = n.getLeftChild();
@@ -47,7 +72,7 @@ public class ZoneTree {
         return sb.toString();
     }
 
-    public void printDot(){
+    private void printDot(){
         FileWriter fw = null;
         try {
             fw = new FileWriter("tree.dot");
@@ -65,11 +90,23 @@ public class ZoneTree {
         }
     }
 
+    /**
+     * To judge whether the node n is the sibling of the current node.
+     * @param curtNode
+     * @param n
+     * @return true if n is the sibling of curtNode;false else;
+     */
     private boolean isSibling(Node curtNode, Node n) {
 
         return n.getData().length() == curtNode.getData().length();
     }
 
+    /**
+     * To judge the node n whether it's the successor of the current node.
+     * @param curtNode
+     * @param n
+     * @return true if the node n is the successor of curtNode;false else;
+     */
     private boolean isSuccessor(Node curtNode, Node n) {
 
         return n.getData().indexOf(curtNode.getData()) != -1;
@@ -78,6 +115,7 @@ public class ZoneTree {
     public static void main(String[] args) {
         ZoneTree zt = new ZoneTree();
         Node n = new Node("山东省", "37");
+        zt.addNode(n);
         zt.addNode(n);
         zt.addNode(new Node("北京","01"));
         zt.addNode(new Node("河南","38"));
@@ -96,6 +134,9 @@ public class ZoneTree {
         zt.addNode(new Node("商河1", "381681"));
         zt.addNode(new Node("齐河1", "381683"));
         zt.printDot();
-        System.out.println(zt);
+    }
+
+    public Node getRoot() {
+        return root;
     }
 }
