@@ -1,0 +1,6 @@
+# The files below will not be commited!
+./idea
+.identifier.iml
+target/
+tree.dot
+tree.png
