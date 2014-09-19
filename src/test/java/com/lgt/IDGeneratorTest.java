@@ -41,5 +41,17 @@ public class IDGeneratorTest{
     @Test
     public void testGetIdentifier(){
         assertEquals("X",IDGenerator.getIdentifierStr(ids));
+        String str="37158119871113687";
+        assertEquals("6",IDGenerator.getIdentifierStr(str));
+    }
+    @Test
+    public void testGetZoneData(){
+        assertEquals("420102",IDGenerator.getZoneData("江岸区"));
+    }
+
+    @Test
+    public void testGetSequence(){
+        String seq = IDGenerator.getSequence("江岸区");
+        assertEquals("000",seq);
     }
 }
