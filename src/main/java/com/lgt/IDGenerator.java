@@ -1,6 +1,8 @@
 package com.lgt;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,10 +48,33 @@ public class IDGenerator {
         return factor[index];
     }
 
+    /**
+     * 根据用户输入的地区的名称，返回其所对应的区域编码。
+     * 此名称可以进行模糊匹配，不论输入的名称是否是够6位编码，都会返回6位。
+     * 比如输入山东，会返回370000，输入湖北，返回420000
+     * @param zoneName 地方名称
+     * @return 对应6位编码
+     */
     public static String getZoneData(String zoneName){
-
+        List<String> names = getOptionalNames(zoneName);
         Node n = zt.findNode(zt.getRoot(),zoneName);
         return n.getData();
+    }
+
+    /**
+     * 此方法的目的是对于输入的名称尽可能匹配。
+     * 当前实现仅是简单的加上省／市／县／区。
+     * @param zoneName 想要获取编码的地区名称
+     * @return 所有可能匹配的名称链表
+     */
+    private static List<String> getOptionalNames(String zoneName) {
+        List<String> names = new ArrayList<String>();
+        names.add(zoneName);
+        names.add(zoneName+"省");
+        names.add(zoneName+"市");
+        names.add(zoneName+"县");
+        names.add(zoneName+"区");
+        return names;
     }
 
     public static String getBirthday(String   birth){
